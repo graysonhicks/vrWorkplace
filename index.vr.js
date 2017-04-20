@@ -9,7 +9,6 @@ import {
   VrButton
 } from 'react-vr';
 
-import Button from './components/MenuButton/index.js'
 
 export default class vrWorkplace extends React.Component {
     constructor() {
