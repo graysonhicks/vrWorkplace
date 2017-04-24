@@ -8,6 +8,7 @@ import {
   View,
   VrButton
 } from 'react-vr';
+import Point from './components/point.js';
 
 
 export default class vrWorkplace extends React.Component {
@@ -47,6 +48,7 @@ export default class vrWorkplace extends React.Component {
           </VrButton>
 
         </View>
+        <Point />
 
       </View>
     );
