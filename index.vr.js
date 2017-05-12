@@ -6,27 +6,104 @@ import {
   Pano,
   Text,
   View,
-  VrButton
+  VrButton,
+  Mesh
 } from 'react-vr';
 import Point from './components/point.js';
+import InfoPanel from './components/infopanel.js';
 
 
 export default class vrWorkplace extends React.Component {
-    constructor() {
-   super();
+    constructor(props) {
+   super(props);
+
    this.state = {
-        workplace: 'none',
-        panoImage: 'chess-world.jpg'
+       workplaces: [
+           {
+                id: 0,
+                workplace: 'none',
+                panoImage: 'chess-world.jpg'
+           },
+           {
+               id: 1,
+               workplace: 'office',
+               panoImage: 'office.jpg',
+               navigations: [{
+                  step: 2,
+                  translate: [0.2, -0.03, -1],
+                  rotation: [0, 20, 0]
+              }]
+          },
+          {
+              id: 2,
+              workplace: 'farm',
+              panoImage: 'farm.jpg',
+              navigations: [{
+                  step: 3,
+                  translate: [-0.43, -0.01, 0.9],
+                          rotation: [0, 140, 0]
+              }]
+         },
+         {
+             id: 1,
+             workplace: 'office',
+             panoImage: 'office.jpg',
+             navigations: [{
+                step: 1,
+                translate: [-0.4, 0.05, -0.9],
+                rotation: [0, 0, 0]
+            }]
+         }
+       ]
    };
 
  }
+
+ componentWillMount() {
+    this.setState({
+        current_workplace: this.state.workplaces[1]
+    });
+}
+
+
 
   render() {
       console.log(this.state);
     return (
       <View>
 
-        <Pano source={asset(this.state.panoImage)}/>
+        <Pano source={asset(this.state.current_workplace.panoImage)}/>
+            {
+              this.state.current_workplace['navigations'].map(function(item, i) {
+                    console.log(item);
+                  return <Mesh key = {i}
+                  style = {
+                          {
+                              layoutOrigin: [0.5, 0.5],
+                              transform: [{
+                                  translate: item['translate']
+                              }, {
+                                  rotateX: item['rotation'][0]
+                              }, {
+                                  rotateY: item['rotation'][1]
+                              }, {
+                                  rotateZ: item['rotation'][2]
+                              }]
+                          }
+                      } >
+                      <VrButton
+                  style = {
+                          {
+                              width: 0.15,
+                              height: 0.15,
+                              borderRadius: 50,
+                              backgroundColor: 'blue'
+                          }
+                      } >
+                      </VrButton> </Mesh>
+              })
+          }
+
             <View style={{
             flex: 1,
             flexDirection: 'column',
@@ -34,6 +111,8 @@ export default class vrWorkplace extends React.Component {
             alignItems: 'stretch',
             transform: [{translate: [-1, 2, -5]}],
           }}>
+
+
           <View style={{ margin: 0.3, height: 0.3, backgroundColor: 'transparent'}}>
             <Text style={{fontSize: 0.2, textAlign: 'center', fontWeight: 'bold'}}>Choose Your Workplace</Text>
           </View>
