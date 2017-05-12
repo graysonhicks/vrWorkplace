@@ -2,6 +2,10 @@
 
 ## A Simple VR App To Explore Different Work Environments
 
+## Use
+- Choose a workplace from the main menu
+- discover 'hotpoints' around workplace and click to learn more
+
 ### For deployment
 
 - on `master` branch, `npm run bundle` to build prod bundles in `/build` folder
@@ -15,3 +19,9 @@
 - `gh-pages` also requires the "homepage" to be set in `package.json`, it will look like this: `"homepage": "https://graysonhicks.github.io/vrWorkplace"`
 - now run `npm run deploy`
 - you should not have to checkout/merge/alter on the gh-pages directly as long as this process is done correctly, otherwise can cause failures
+
+### To Do
+- loading animation for pano images
+- animate hotpoints on hover
+- show info panel on hotpoints click
+- refactor buttons and hotpoints to individual component files
