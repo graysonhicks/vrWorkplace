@@ -28,8 +28,8 @@ export default class vrWorkplace extends React.Component {
                id: 1,
                workplace: 'office',
                panoImage: 'office.jpg',
-               navigations: [{
-                  step: 2,
+               hotPoints: [{
+                  text: "This is a hotpoint!",
                   translate: [0.2, -0.03, -1],
                   rotation: [0, 20, 0]
               }]
@@ -38,8 +38,8 @@ export default class vrWorkplace extends React.Component {
               id: 2,
               workplace: 'farm',
               panoImage: 'farm.jpg',
-              navigations: [{
-                  step: 3,
+              hotPoints: [{
+                  text: "This is a hotpoint!",
                   translate: [-0.43, -0.01, 0.9],
                           rotation: [0, 140, 0]
               }]
@@ -48,8 +48,8 @@ export default class vrWorkplace extends React.Component {
              id: 1,
              workplace: 'office',
              panoImage: 'office.jpg',
-             navigations: [{
-                step: 1,
+             hotPoints: [{
+                text: "This is a hotpoint!",
                 translate: [-0.4, 0.05, -0.9],
                 rotation: [0, 0, 0]
             }]
@@ -68,41 +68,42 @@ export default class vrWorkplace extends React.Component {
 
 
   render() {
-      console.log(this.state);
+      {
+          if(this.state.current_workplace.id !== 0) {
+          var hotPoints = this.state.current_workplace['hotPoints'].map(function(item, i) {
+                console.log(item);
+              return <View key = {i}
+              style = {
+                      {
+                          layoutOrigin: [0.5, 0.5],
+                          transform: [{
+                              translate: item['translate']
+                          }, {
+                              rotateX: item['rotation'][0]
+                          }, {
+                              rotateY: item['rotation'][1]
+                          }, {
+                              rotateZ: item['rotation'][2]
+                          }]
+                      }
+                  } ><VrButton
+              style = {
+                      {
+                          width: 0.15,
+                          height: 0.15,
+                          borderRadius: 50,
+                          backgroundColor: 'white'
+                      }
+                  } >
+              </VrButton></View>
+          })
+      }
+        }
     return (
       <View>
 
         <Pano source={asset(this.state.current_workplace.panoImage)}/>
-            {
-              this.state.current_workplace['navigations'].map(function(item, i) {
-                    console.log(item);
-                  return <Mesh key = {i}
-                  style = {
-                          {
-                              layoutOrigin: [0.5, 0.5],
-                              transform: [{
-                                  translate: item['translate']
-                              }, {
-                                  rotateX: item['rotation'][0]
-                              }, {
-                                  rotateY: item['rotation'][1]
-                              }, {
-                                  rotateZ: item['rotation'][2]
-                              }]
-                          }
-                      } >
-                      <VrButton
-                  style = {
-                          {
-                              width: 0.15,
-                              height: 0.15,
-                              borderRadius: 50,
-                              backgroundColor: 'blue'
-                          }
-                      } >
-                      </VrButton> </Mesh>
-              })
-          }
+
 
             <View style={{
             flex: 1,
@@ -111,6 +112,9 @@ export default class vrWorkplace extends React.Component {
             alignItems: 'stretch',
             transform: [{translate: [-1, 2, -5]}],
           }}>
+
+
+         {hotPoints}
 
 
           <View style={{ margin: 0.3, height: 0.3, backgroundColor: 'transparent'}}>
@@ -127,7 +131,6 @@ export default class vrWorkplace extends React.Component {
           </VrButton>
 
         </View>
-        <Point />
 
       </View>
     );
