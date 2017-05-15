@@ -36,15 +36,15 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                0.2, -0.03, -1
+                                0.5, -0.03, -1
                             ],
-                            rotation: [0, 20, 0]
+                            rotation: [0, 0, 0]
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                10, 0, 1
+                                0.5, 0, 1
                             ],
-                            rotation: [0, -40, 0]
+                            rotation: [0, 0, 0]
                         }
                     ]
                 }, {
@@ -56,15 +56,15 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                -0.43, -0.01, 0.9
+                                0.5, 1, 2
                             ],
-                            rotation: [0, 140, 0]
+                            rotation: [0, 0, 0]
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                0, 0, -5
+                                0.5, .5, -3
                             ],
-                            rotation: [0, 140, 0]
+                            rotation: [0, 0, 0]
                         }
                     ]
                 }, {
@@ -76,15 +76,15 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                -0.4, 0.05, -0.9
+                                0.5, 0.05, -0.9
                             ],
                             rotation: [0, 0, 0]
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                5, 0, 0
+                                0.5, 0, 1
                             ],
-                            rotation: [0, -40, 0]
+                            rotation: [0, 0, 0]
                         }
                     ]
                 }
