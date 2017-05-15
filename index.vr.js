@@ -46,8 +46,7 @@ export default class vrWorkplace extends React.Component {
                                 0.5, 0, 1
                             ],
                             rotation: [0, 0, 0]
-                        },
-                        {
+                        }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 0, 4
@@ -73,8 +72,7 @@ export default class vrWorkplace extends React.Component {
                                 0.5, .5, -3
                             ],
                             rotation: [0, 0, 0]
-                        },
-                        {
+                        }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 1, 1
@@ -100,8 +98,7 @@ export default class vrWorkplace extends React.Component {
                                 0.5, 0, 1
                             ],
                             rotation: [0, 0, 0]
-                        },
-                        {
+                        }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 0, 3
@@ -187,7 +184,7 @@ export default class vrWorkplace extends React.Component {
                 </View>
             })
 
-        return hotPoints;
+            return hotPoints;
         }
     }
 
@@ -211,17 +208,13 @@ export default class vrWorkplace extends React.Component {
     }
     sceneOnLoad() {
 
-        postMessage({
-            type: "sceneLoadStart"
-        })
+        postMessage({type: "sceneLoadStart"})
     }
 
- sceneOnLoadEnd() {
+    sceneOnLoadEnd() {
 
-     postMessage({
-         type: "sceneLoadEnd"
-     })
- }
+        postMessage({type: "sceneLoadEnd"})
+    }
 
     render() {
         var hotPoints = this.buildHotpoints();
@@ -232,7 +225,9 @@ export default class vrWorkplace extends React.Component {
             <View>
 
                 <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
+
                 {hotPoints}
+                
                 <View style={{
                     flex: 1,
                     flexDirection: 'column',
