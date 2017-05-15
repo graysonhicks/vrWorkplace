@@ -8,14 +8,38 @@ import {VRInstance} from 'react-vr-web';
 function init(bundle, parent, options) {
   const vr = new VRInstance(bundle, 'vrWorkplace', parent, {
     // Add custom options here
+
     ...options,
   });
+
+
   vr.render = function() {
     // Any custom behavior you want to perform on each frame goes here
+
   };
+  vr.rootView.context.worker.addEventListener('message', onVRMessage);
   // Begin the animation loop
   vr.start();
   return vr;
 }
+
+function onVRMessage(e) {
+    switch (e.data.type) {
+      case 'sceneChanged':
+      if (window.playerCamera.zoom != 1) {
+        window.playerCamera.zoom = 1;
+        window.playerCamera.updateProjectionMatrix();
+      }
+      break;
+      case 'sceneLoadStart':
+        document.getElementById('loader').style.display = 'block';
+      break;
+      case 'sceneLoadEnd':
+        document.getElementById('loader').style.display = 'none';
+      break;
+      default:
+      return;
+    }
+  }
 
 window.ReactVR = {init};

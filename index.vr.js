@@ -11,6 +11,7 @@ import {
 } from 'react-vr';
 import Point from './components/point.js';
 import InfoPanel from './components/infopanel.js';
+
 const DEFAULT_ANIMATION_BUTTON_RADIUS = 50;
 const DEFAULT_ANIMATION_BUTTON_SIZE = 0.05;
 
@@ -45,6 +46,13 @@ export default class vrWorkplace extends React.Component {
                                 0.5, 0, 1
                             ],
                             rotation: [0, 0, 0]
+                        },
+                        {
+                            text: "Third hotpoint!",
+                            translate: [
+                                0.5, 0, 4
+                            ],
+                            rotation: [0, 0, 0]
                         }
                     ]
                 }, {
@@ -63,6 +71,13 @@ export default class vrWorkplace extends React.Component {
                             text: "Second hotpoint!",
                             translate: [
                                 0.5, .5, -3
+                            ],
+                            rotation: [0, 0, 0]
+                        },
+                        {
+                            text: "Third hotpoint!",
+                            translate: [
+                                0.5, 1, 1
                             ],
                             rotation: [0, 0, 0]
                         }
@@ -85,6 +100,13 @@ export default class vrWorkplace extends React.Component {
                                 0.5, 0, 1
                             ],
                             rotation: [0, 0, 0]
+                        },
+                        {
+                            text: "Third hotpoint!",
+                            translate: [
+                                0.5, 0, 3
+                            ],
+                            rotation: [0, 0, 0]
                         }
                     ]
                 }
@@ -97,6 +119,7 @@ export default class vrWorkplace extends React.Component {
 
     componentWillMount() {
         this.setState({current_workplace: this.state.workplaces[0]});
+
     }
     componentWillUnmount() {
         if (this.frameHandle) {
@@ -106,7 +129,9 @@ export default class vrWorkplace extends React.Component {
     }
     componentDidMount() {
         this.animatePointer();
+
     }
+
     animatePointer() {
         var delta = this.state.animationWidth + 0.002;
         var radius = this.state.animationRadius + 10;
@@ -124,52 +149,45 @@ export default class vrWorkplace extends React.Component {
         this.setState({current_workplace: new_workplace});
 
     }
-
     buildHotpoints() {
         var that = this;
         if (this.state.current_workplace.id !== 0) {
             var hotPoints = this.state.current_workplace['hotPoints'].map(function(item, i) {
 
                 return <View key={i}>
-                <VrButton
-                    style = {
+                    <VrButton style={{
+                        width: 0.15,
+                        height: 0.15,
+                        borderRadius: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderStyle: 'solid',
+                        borderColor: '#FFFFFF80',
+                        borderWidth: 0.01,
+                        transform: [
                             {
-                                width: 0.15,
-                                height: 0.15,
-                                borderRadius: 50,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                borderStyle: 'solid',
-                                borderColor: '#FFFFFF80',
-                                borderWidth: 0.01,
-                                transform: [
-                                    {
-                                        translate: item['translate']
-                                    }, {
-                                        rotateX: item['rotation'][0]
-                                    }, {
-                                        rotateY: item['rotation'][1]
-                                    }, {
-                                        rotateZ: item['rotation'][2]
-                                    }
-                                ]
+                                translate: item['translate']
+                            }, {
+                                rotateX: item['rotation'][0]
+                            }, {
+                                rotateY: item['rotation'][1]
+                            }, {
+                                rotateZ: item['rotation'][2]
                             }
-                        } >
-                        <VrButton
-                    style = {
-                            {
-                                width: that.state.animationWidth,
-                                height: that.state.animationWidth,
-                                borderRadius: that.state.animationRadius,
-                                backgroundColor: '#FFFFFFD9'
-                            }
-                        } >
-                        </VrButton></VrButton>
+                        ]
+                    }}>
+                        <VrButton style={{
+                            width: that.state.animationWidth,
+                            height: that.state.animationWidth,
+                            borderRadius: that.state.animationRadius,
+                            backgroundColor: '#FFFFFFD9'
+                        }}></VrButton>
+                    </VrButton>
 
                 </View>
             })
 
-            return hotPoints;
+        return hotPoints;
         }
     }
 
@@ -191,6 +209,19 @@ export default class vrWorkplace extends React.Component {
 
         return buttons;
     }
+    sceneOnLoad() {
+
+        postMessage({
+            type: "sceneLoadStart"
+        })
+    }
+
+ sceneOnLoadEnd() {
+
+     postMessage({
+         type: "sceneLoadEnd"
+     })
+ }
 
     render() {
         var hotPoints = this.buildHotpoints();
@@ -200,7 +231,7 @@ export default class vrWorkplace extends React.Component {
         return (
             <View>
 
-                <Pano source={asset(this.state.current_workplace.panoImage)}/>
+                <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
                 {hotPoints}
                 <View style={{
                     flex: 1,
@@ -213,8 +244,6 @@ export default class vrWorkplace extends React.Component {
                         }
                     ]
                 }}>
-
-
 
                     <View style={{
                         margin: 0.3,
