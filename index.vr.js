@@ -20,9 +20,12 @@ export default class vrWorkplace extends React.Component {
     constructor(props) {
         super(props);
 
+         this.lastUpdate = Date.now();
+
         this.state = {
             animationWidth: DEFAULT_ANIMATION_BUTTON_SIZE,
             animationRadius: DEFAULT_ANIMATION_BUTTON_RADIUS,
+            hoverRotation: 0,
             workplaces: [
                 {
                     id: 0,
@@ -111,7 +114,8 @@ export default class vrWorkplace extends React.Component {
         };
 
         this.onNavigationClick = this.onNavigationClick.bind(this);
-        this.animatePointer = this.animatePointer.bind(this);
+        this.animateHotPoint = this.animateHotPoint.bind(this);
+        this.hotPointEnter = this.hotPointEnter.bind(this);
     }
 
     componentWillMount() {
@@ -125,11 +129,11 @@ export default class vrWorkplace extends React.Component {
         }
     }
     componentDidMount() {
-        this.animatePointer();
+        this.animateHotPoint();
 
     }
 
-    animatePointer() {
+    animateHotPoint() {
         var delta = this.state.animationWidth + 0.002;
         var radius = this.state.animationRadius + 10;
         if (delta >= 0.13) {
@@ -137,7 +141,18 @@ export default class vrWorkplace extends React.Component {
             radius = DEFAULT_ANIMATION_BUTTON_RADIUS;
         }
         this.setState({animationWidth: delta, animationRadius: radius})
-        this.frameHandle = requestAnimationFrame(this.animatePointer);
+        this.frameHandle = requestAnimationFrame(this.animateHotPoint);
+    }
+
+
+    hotPointEnter(e, item){
+        const now = Date.now();
+        const delta = now - this.lastUpdate;
+        this.lastUpdate = now;
+        this.setState({ hoverRotation: this.state.hoverRotation + delta / 2 });
+        this.frameHandle = requestAnimationFrame(this.hotPointEnter);
+
+    //    this.state.current_workplace["hotPoints"][0]['rotation'][1] = this.state.hoverRotation;
     }
     onNavigationClick(item, e) {
 
@@ -151,7 +166,7 @@ export default class vrWorkplace extends React.Component {
         if (this.state.current_workplace.id !== 0) {
             var hotPoints = this.state.current_workplace['hotPoints'].map(function(item, i) {
 
-                return <View key={i}>
+                return <View key={i} >
                     <VrButton style={{
                         width: 0.15,
                         height: 0.15,
@@ -173,11 +188,16 @@ export default class vrWorkplace extends React.Component {
                             }
                         ]
                     }}>
-                        <VrButton style={{
+                        <VrButton onEnter={e => that.hotPointEnter(e, item)} style={{
                             width: that.state.animationWidth,
                             height: that.state.animationWidth,
                             borderRadius: that.state.animationRadius,
-                            backgroundColor: '#FFFFFFD9'
+                            backgroundColor: '#FFFFFFD9',
+                            transform: [
+                                {
+                                    rotateY: that.state.hoverRotation
+                                }
+                            ]
                         }}></VrButton>
                     </VrButton>
 
@@ -227,7 +247,7 @@ export default class vrWorkplace extends React.Component {
                 <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
 
                 {hotPoints}
-                
+
                 <View style={{
                     flex: 1,
                     flexDirection: 'column',
