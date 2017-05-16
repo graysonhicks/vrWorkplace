@@ -26,7 +26,7 @@ export default class vrWorkplace extends React.Component {
         this.state = {
             animationWidth: DEFAULT_ANIMATION_BUTTON_SIZE,
             animationRadius: DEFAULT_ANIMATION_BUTTON_RADIUS,
-            hoverRotation: null,
+            hoverRotation: 0,
             workplaces: [
                 {
                     id: 0,
@@ -147,20 +147,19 @@ export default class vrWorkplace extends React.Component {
 
 
     hotPointEnter(e, item){
-
         const now = Date.now();
         const delta = now - this.lastUpdate;
         this.lastUpdate = now;
         this.setState({ hoverRotation: this.state.hoverRotation + delta / 2 });
 
-        //this.frameHandle = requestAnimationFrame(this.hotPointEnter);
+        this.frameHandle = requestAnimationFrame(this.hotPointEnter);
 
 
     }
 
     hotPointExit(e, item){
 
-        this.setState({hoverRotation: null});
+        this.setState({hoverRotation: 0});
         //this.frameHandle = requestAnimationFrame(this.hotPointExit);
     }
     onNavigationClick(item, e) {
@@ -192,7 +191,7 @@ export default class vrWorkplace extends React.Component {
                             }, {
                                 rotateX: item['rotation'][0]
                             }, {
-                                rotateY: that.state.hoverRotation ? that.state.hoverRotation : item['rotation'][1]
+                                rotateY: that.state.hoverRotation
                             },{
                                 rotateZ: item['rotation'][2]
                             }
