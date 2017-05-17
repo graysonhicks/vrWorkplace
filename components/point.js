@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, VrButton } from 'react-vr';
-
+import InfoPanel from './infopanel.js';
 
 export default class Point extends Component {
 
   render() {
+      var panel;
+            if(this.props.item.panelOn){
+                panel = <InfoPanel />;
+            } else {
+                panel = null;
+            }
 
             return (
-                <View onEnter={e => this.props.hotPointEnter(e, this.props.item)} onExit={e => this.props.hotPointExit(e, this.props.item)}>
-                   <VrButton style={{
+                <View>
+                   <VrButton onEnter={e => this.props.hotPointEnter(e, this.props.item)} onExit={e => this.props.hotPointExit(e, this.props.item)} style={{
                        width: 0.15,
                        height: 0.15,
                        borderRadius: 50,
@@ -36,6 +42,8 @@ export default class Point extends Component {
                            backgroundColor: '#FFFFFFD9',
                        }}></VrButton>
                    </VrButton>
+
+                    {panel}
 
                </View>
 

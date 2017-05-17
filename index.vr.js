@@ -7,11 +7,11 @@ import {
     Text,
     View,
     VrButton,
-    Mesh
+    Plane
 } from 'react-vr';
 import Point from './components/point.js';
 import Button from './components/button.js';
-import InfoPanel from './components/infopanel.js';
+
 
 
 const DEFAULT_ANIMATION_BUTTON_RADIUS = 50;
@@ -44,19 +44,22 @@ export default class vrWorkplace extends React.Component {
                             translate: [
                                 0.5, -0.03, -1
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: true
                         }, {
                             text: "Second hotpoint!",
                             translate: [
                                 0.5, 0, 1
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: false
                         }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 0, 4
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: false
                         }
                     ]
                 }, {
@@ -70,19 +73,22 @@ export default class vrWorkplace extends React.Component {
                             translate: [
                                 0.5, 1, 2
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: false
                         }, {
                             text: "Second hotpoint!",
                             translate: [
                                 0.5, .5, -3
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: false
                         }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 1, 1
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: false
                         }
                     ]
                 }, {
@@ -96,19 +102,22 @@ export default class vrWorkplace extends React.Component {
                             translate: [
                                 0.5, 0.05, -0.9
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: false
                         }, {
                             text: "Second hotpoint!",
                             translate: [
                                 0.5, 0, 1
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: false
                         }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 0, 3
                             ],
-                            rotation: [0, 0, 0]
+                            rotation: [0, 0, 0],
+                            panelOn: false
                         }
                     ]
                 }
@@ -257,6 +266,7 @@ export default class vrWorkplace extends React.Component {
                 </View>
 
             </View>
+
         );
     }
 };
