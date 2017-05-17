@@ -21,12 +21,12 @@
 - you should not have to checkout/merge/alter on the gh-pages directly as long as this process is done correctly, otherwise can cause failures
 
 ### To Do
-~~inital loading animation~~
+- ~~inital loading animation~~
 - loading animation for pano image changes
 - new main menu pano
 - maybe keep pano in state
 - animate hotpoints on hover (use Animate like this: https://www.sitepoint.com/building-a-full-sphere-3d-image-gallery-with-react-vr/)
 - menu jump on hotpoint click bug
 - set correct rotations on hotpoints
-~~show info panel on hotpoints click~~
-~~refactor buttons and hotpoints to individual component files~~
+- ~~show info panel on hotpoints click~~
+- ~~refactor buttons and hotpoints to individual component files~~
