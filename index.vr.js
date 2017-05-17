@@ -10,6 +10,7 @@ import {
     Mesh
 } from 'react-vr';
 import Point from './components/point.js';
+import Button from './components/button.js';
 import InfoPanel from './components/infopanel.js';
 
 
@@ -175,37 +176,15 @@ export default class vrWorkplace extends React.Component {
         if (this.state.current_workplace.id !== 0) {
             var hotPoints = this.state.current_workplace['hotPoints'].map(function(item, i) {
 
-                return <View key={i} onEnter={e => that.hotPointEnter(e, item)} onExit={e => that.hotPointExit(e, item)}>
-                    <VrButton key={i} style={{
-                        width: 0.15,
-                        height: 0.15,
-                        borderRadius: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderStyle: 'solid',
-                        borderColor: '#FFFFFF80',
-                        borderWidth: 0.01,
-                        transform: [
-                            {
-                                translate: item['translate']
-                            }, {
-                                rotateX: item['rotation'][0]
-                            }, {
-                                rotateY: that.state.hoverRotation
-                            },{
-                                rotateZ: item['rotation'][2]
-                            }
-                        ]
-                    }}>
-                        <VrButton key={i} style={{
-                            width: that.state.animationWidth,
-                            height: that.state.animationWidth,
-                            borderRadius: that.state.animationRadius,
-                            backgroundColor: '#FFFFFFD9',
-                        }}></VrButton>
-                    </VrButton>
-
-                </View>
+                return <Point
+                    key={i}
+                    item={item}
+                    hotPointEnter={that.hotPointEnter}
+                    hotPointExit={that.hotPointExit}
+                    hoverRotation={that.state.hoverRotation}
+                    animationWidth={that.state.animationWidth}
+                    animationRadius={that.state.animationRadius}
+                    />
             })
 
             return hotPoints;
@@ -216,16 +195,11 @@ export default class vrWorkplace extends React.Component {
         var that = this;
         var buttons = this.state.workplaces.filter(item => item.id !== 0).map(function(item, i) {
 
-            return <VrButton key={i} style={{
-                margin: 0.1,
-                height: 0.3,
-                backgroundColor: item.buttonColor
-            }} onClick= {e => that.onNavigationClick(item, e)}>
-                <Text style={{
-                    fontSize: 0.2,
-                    textAlign: 'center'
-                }}>{item.workplace}</Text>
-            </VrButton>
+            return <Button
+                    key={i}
+                    item={item}
+                    onNavigationClick={this.onNavigationClick}
+                    />
         });
 
         return buttons;
