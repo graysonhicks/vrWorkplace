@@ -184,6 +184,8 @@ export default class vrWorkplace extends React.Component {
                     hoverRotation={that.state.hoverRotation}
                     animationWidth={that.state.animationWidth}
                     animationRadius={that.state.animationRadius}
+                    currentWorkplace={that.state.current_workplace}
+
                     />
             })
 
@@ -198,7 +200,7 @@ export default class vrWorkplace extends React.Component {
             return <Button
                     key={i}
                     item={item}
-                    onNavigationClick={this.onNavigationClick}
+                    onNavigationClick={that.onNavigationClick}
                     />
         });
 
@@ -217,7 +219,6 @@ export default class vrWorkplace extends React.Component {
     render() {
 
         var hotPoints = this.buildHotpoints();
-
         var buttons = this.buildButtons();
 
         return (
@@ -250,7 +251,8 @@ export default class vrWorkplace extends React.Component {
                             fontWeight: 'bold'
                         }}>Choose Your Workplace</Text>
                     </View>
-                    {buttons}
+
+                {buttons}
 
                 </View>
 
