@@ -23,6 +23,10 @@
 ### To Do
 ~~ inital loading animation ~~
 - loading animation for pano image changes
-- animate hotpoints on hover
-- show info panel on hotpoints click
+- new main menu pano
+- maybe keep pano in state
+- animate hotpoints on hover (use Animate like this: [https://www.sitepoint.com/building-a-full-sphere-3d-image-gallery-with-react-vr/])
+- menu jump on hotpoint click bug
+- set correct rotations on hotpoints
+~~ show info panel on hotpoints click ~~
 ~~ refactor buttons and hotpoints to individual component files ~~
