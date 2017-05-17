@@ -3,18 +3,30 @@ import { AppRegistry, Text, View, VrButton } from 'react-vr';
 import InfoPanel from './infopanel.js';
 
 export default class Point extends Component {
+    constructor() {
+        super();
+
+        this.state = { panelOn: false };
+        this.togglePanel = this.togglePanel.bind(this);
+      }
+
+      togglePanel() {
+      this.setState({
+        panelOn: !this.state.panelOn
+      })
+    }
 
   render() {
       var panel;
-            if(this.props.item.panelOn){
-                panel = <InfoPanel />;
+            if(this.state.panelOn){
+                panel = <InfoPanel item={this.props.item}/>;
             } else {
                 panel = null;
             }
 
             return (
                 <View>
-                   <VrButton onEnter={e => this.props.hotPointEnter(e, this.props.item)} onExit={e => this.props.hotPointExit(e, this.props.item)} style={{
+                   <VrButton onClick={this.togglePanel} onEnter={e => this.props.hotPointEnter(e, this.props.item)} onExit={e => this.props.hotPointExit(e, this.props.item)} style={{
                        width: 0.15,
                        height: 0.15,
                        borderRadius: 50,
