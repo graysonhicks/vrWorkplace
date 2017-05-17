@@ -21,7 +21,8 @@
 - you should not have to checkout/merge/alter on the gh-pages directly as long as this process is done correctly, otherwise can cause failures
 
 ### To Do
-- loading animation for pano images
+~~ inital loading animation ~~
+- loading animation for pano image changes
 - animate hotpoints on hover
 - show info panel on hotpoints click
-- refactor buttons and hotpoints to individual component files
+~~ refactor buttons and hotpoints to individual component files ~~
