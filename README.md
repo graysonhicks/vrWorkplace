@@ -25,10 +25,13 @@
 - loading animation for pano image changes
 - make welcome text its own Component
 - fade <Welcome /> in and out on page load, remove from click events
+- animate main menu slide over when leaving homepage
+- home button to return to main menu from scene
 - ~~new main menu pano~~
 - maybe keep pano in state
 - animate hotpoints on hover (use Animate like this: https://www.sitepoint.com/building-a-full-sphere-3d-image-gallery-with-react-vr/)
-- menu jump on hotpoint click bug
+- ~~menu jump on hotpoint click bug~~
 - set correct rotations on hotpoints
+- ~~set translates on hotpoints to be equidistant from perspective~~
 - ~~show info panel on hotpoints click~~
 - ~~refactor buttons and hotpoints to individual component files~~

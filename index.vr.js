@@ -44,21 +44,21 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                1, .3, -1.5
+                                1.5, .75, -3.5
                             ],
-                            rotation: [0, -100, 0],
+                            rotation: [0, -40, 0],
                             panelOn: false
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                0.5, 0, 1
+                                3, 0, 3.5
                             ],
                             rotation: [0, -120, 0],
                             panelOn: false
                         }, {
                             text: "Third hotpoint!",
                             translate: [
-                                0.5, 0, 4
+                                0.5, 0, 3.5
                             ],
                             rotation: [0, 180, 0],
                             panelOn: false
@@ -73,21 +73,21 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                0.5, 1, 2
+                                0.5, 1, 3.5
                             ],
                             rotation: [0, 0, 0],
                             panelOn: false
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                0.5, .5, -3
+                                0.5, .5, -3.5
                             ],
                             rotation: [0, 0, 0],
                             panelOn: false
                         }, {
                             text: "Third hotpoint!",
                             translate: [
-                                0.5, 1, 1
+                                0.5, 1, 3.5
                             ],
                             rotation: [0, 0, 0],
                             panelOn: false
@@ -102,21 +102,21 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                0.5, 0.05, -0.9
+                                0.5, 0.05, -3.5
                             ],
                             rotation: [0, 0, 0],
                             panelOn: false
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                0.5, 0, 1
+                                0.5, 0, 3.5
                             ],
                             rotation: [0, 0, 0],
                             panelOn: false
                         }, {
                             text: "Third hotpoint!",
                             translate: [
-                                0.5, 0, 3
+                                0.5, 3, 3.5
                             ],
                             rotation: [0, 0, 0],
                             panelOn: false
@@ -131,6 +131,7 @@ export default class vrWorkplace extends React.Component {
         this.hotPointEnter = this.hotPointEnter.bind(this);
         this.hotPointExit = this.hotPointExit.bind(this);
         this.toggleDisplayWelcome = this.toggleDisplayWelcome.bind(this);
+        this.testWelcome = this.testWelcome.bind(this);
         this.centerMenu = this.centerMenu.bind(this);
         this.shiftMenu = this.shiftMenu.bind(this);
     }
@@ -244,23 +245,10 @@ export default class vrWorkplace extends React.Component {
 
         return buttons;
     }
-    sceneOnLoad() {
 
-        postMessage({type: "sceneLoadStart"})
-    }
-
-    sceneOnLoadEnd() {
-
-        postMessage({type: "sceneLoadEnd"})
-    }
-
-    render() {
-
-        var hotPoints = this.buildHotpoints();
-        var buttons = this.buildButtons();
-        var welcome;
+    testWelcome(){
         if(this.state.displayWelcome){
-            welcome = <View style={{
+            return(<View style={{
                             flex: 1,
                             flexDirection: 'row',
                             width: 10,
@@ -276,10 +264,27 @@ export default class vrWorkplace extends React.Component {
                                     textAlign: 'center',
                                     fontWeight: 'bold'
                                 }}>Weclome to vrWorkplace</Text>
-                        </View>
+                        </View>)
         } else {
-            welcome = <View></View>;
+            return <View></View>;
         }
+    }
+    sceneOnLoad() {
+
+        postMessage({type: "sceneLoadStart"})
+    }
+
+    sceneOnLoadEnd() {
+
+        postMessage({type: "sceneLoadEnd"})
+    }
+
+    render() {
+
+        var hotPoints = this.buildHotpoints();
+        var buttons = this.buildButtons();
+        var welcome = this.testWelcome();
+
 
         return (
             <View>
@@ -289,12 +294,7 @@ export default class vrWorkplace extends React.Component {
 
                 {hotPoints}
 
-{welcome}
-
-
-
-
-
+                {welcome}
 
                 <View style={{
                     flex: 1,
