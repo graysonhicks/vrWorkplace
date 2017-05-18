@@ -32,7 +32,7 @@ export default class vrWorkplace extends React.Component {
                 {
                     id: 0,
                     workplace: 'none',
-                    panoImage: 'chess-world.jpg'
+                    panoImage: 'space.jpg'
                 }, {
                     id: 1,
                     workplace: 'office',
