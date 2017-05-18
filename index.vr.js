@@ -28,6 +28,8 @@ export default class vrWorkplace extends React.Component {
             animationWidth: DEFAULT_ANIMATION_BUTTON_SIZE,
             animationRadius: DEFAULT_ANIMATION_BUTTON_RADIUS,
             hoverRotation: 0,
+            displayWelcome: true,
+            menuCoordinates: [1.5, 2, -5],
             workplaces: [
                 {
                     id: 0,
@@ -42,9 +44,9 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                0.5, .3, -1
+                                1, .3, -1.5
                             ],
-                            rotation: [0, -70, 0],
+                            rotation: [0, -100, 0],
                             panelOn: false
                         }, {
                             text: "Second hotpoint!",
@@ -128,6 +130,9 @@ export default class vrWorkplace extends React.Component {
         this.animateHotPoint = this.animateHotPoint.bind(this);
         this.hotPointEnter = this.hotPointEnter.bind(this);
         this.hotPointExit = this.hotPointExit.bind(this);
+        this.toggleDisplayWelcome = this.toggleDisplayWelcome.bind(this);
+        this.centerMenu = this.centerMenu.bind(this);
+        this.shiftMenu = this.shiftMenu.bind(this);
     }
 
     componentWillMount() {
@@ -142,6 +147,25 @@ export default class vrWorkplace extends React.Component {
     }
     componentDidMount() {
         this.animateHotPoint();
+    }
+
+    toggleDisplayWelcome(){
+
+        this.setState({
+            displayWelcome: !this.state.displayWelcome
+        })
+    }
+
+    centerMenu() {
+
+        var sceneMenuTranslateCoordinates = [-1, 2, -5];
+
+        this.setState({menuCoordinates: sceneMenuTranslateCoordinates})
+    }
+
+    shiftMenu() {
+        var mainMenuTranslateCoordinates = [1.5, 2, -5];
+        this.setState({menuCoordinates: mainMenuTranslateCoordinates})
     }
 
     animateHotPoint() {
@@ -175,6 +199,11 @@ export default class vrWorkplace extends React.Component {
     onNavigationClick(item, e) {
 
         var new_workplace = this.state.workplaces.find(i => i['id'] === item.id);
+
+        if(this.state.current_workplace.id === 0){
+            this.toggleDisplayWelcome();
+            this.centerMenu();
+        }
 
         this.setState({current_workplace: new_workplace});
 
@@ -229,13 +258,43 @@ export default class vrWorkplace extends React.Component {
 
         var hotPoints = this.buildHotpoints();
         var buttons = this.buildButtons();
+        var welcome;
+        if(this.state.displayWelcome){
+            welcome = <View style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            width: 10,
+                            alignItems: 'center',
+                            transform: [
+                                {
+                                    translate: [-4, 0, -5]
+                                }
+                            ]
+                        }}>
+                                <Text style={{
+                                    fontSize: .5,
+                                    textAlign: 'center',
+                                    fontWeight: 'bold'
+                                }}>Weclome to vrWorkplace</Text>
+                        </View>
+        } else {
+            welcome = <View></View>;
+        }
 
         return (
             <View>
 
                 <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
 
+
                 {hotPoints}
+
+{welcome}
+
+
+
+
+
 
                 <View style={{
                     flex: 1,
@@ -244,7 +303,7 @@ export default class vrWorkplace extends React.Component {
                     alignItems: 'stretch',
                     transform: [
                         {
-                            translate: [-1, 2, -5]
+                            translate: this.state.menuCoordinates
                         }
                     ]
                 }}>

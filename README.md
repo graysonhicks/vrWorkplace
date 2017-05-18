@@ -23,7 +23,9 @@
 ### To Do
 - ~~inital loading animation~~
 - loading animation for pano image changes
-- new main menu pano
+- make welcome text its own Component
+- fade <Welcome /> in and out on page load, remove from click events
+- ~~new main menu pano~~
 - maybe keep pano in state
 - animate hotpoints on hover (use Animate like this: https://www.sitepoint.com/building-a-full-sphere-3d-image-gallery-with-react-vr/)
 - menu jump on hotpoint click bug
