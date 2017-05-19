@@ -9,13 +9,10 @@ import {
     VrButton,
     Plane
 } from 'react-vr';
+
+
 import Point from './components/point.js';
 import Button from './components/button.js';
-
-
-
-const DEFAULT_ANIMATION_BUTTON_RADIUS = 50;
-const DEFAULT_ANIMATION_BUTTON_SIZE = 0.05;
 
 export default class vrWorkplace extends React.Component {
 
@@ -25,9 +22,7 @@ export default class vrWorkplace extends React.Component {
          this.lastUpdate = Date.now();
 
         this.state = {
-            animationWidth: DEFAULT_ANIMATION_BUTTON_SIZE,
-            animationRadius: DEFAULT_ANIMATION_BUTTON_RADIUS,
-            hoverRotation: 0,
+
             displayWelcome: true,
             menuCoordinates: [1.5, 2, -5],
             workplaces: [
@@ -47,21 +42,24 @@ export default class vrWorkplace extends React.Component {
                                 1.5, .75, -3.5
                             ],
                             rotation: [0, -40, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 0
                         }, {
                             text: "Second hotpoint!",
                             translate: [
                                 3, 0, 3.5
                             ],
                             rotation: [0, -120, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 1
                         }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 0, 3.5
                             ],
                             rotation: [0, 180, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 2
                         }
                     ]
                 }, {
@@ -76,21 +74,24 @@ export default class vrWorkplace extends React.Component {
                                 0.5, 1, 3.5
                             ],
                             rotation: [0, 0, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 0
                         }, {
                             text: "Second hotpoint!",
                             translate: [
                                 0.5, .5, -3.5
                             ],
                             rotation: [0, 0, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 1
                         }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 1, 3.5
                             ],
                             rotation: [0, 0, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 2
                         }
                     ]
                 }, {
@@ -105,21 +106,24 @@ export default class vrWorkplace extends React.Component {
                                 0.5, 0.05, -3.5
                             ],
                             rotation: [0, 0, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 0
                         }, {
                             text: "Second hotpoint!",
                             translate: [
                                 0.5, 0, 3.5
                             ],
                             rotation: [0, 0, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 1
                         }, {
                             text: "Third hotpoint!",
                             translate: [
                                 0.5, 3, 3.5
                             ],
                             rotation: [0, 0, 0],
-                            panelOn: false
+                            panelOn: false,
+                            index: 2
                         }
                     ]
                 }
@@ -127,9 +131,6 @@ export default class vrWorkplace extends React.Component {
         };
 
         this.onNavigationClick = this.onNavigationClick.bind(this);
-        this.animateHotPoint = this.animateHotPoint.bind(this);
-        this.hotPointEnter = this.hotPointEnter.bind(this);
-        this.hotPointExit = this.hotPointExit.bind(this);
         this.toggleDisplayWelcome = this.toggleDisplayWelcome.bind(this);
         this.testWelcome = this.testWelcome.bind(this);
         this.centerMenu = this.centerMenu.bind(this);
@@ -141,14 +142,12 @@ export default class vrWorkplace extends React.Component {
 
     }
     componentWillUnmount() {
-        if (this.frameHandle) {
-            cancelAnimationFrame(this.frameHandle);
-            this.frameHandle = null;
-        }
+
     }
     componentDidMount() {
-        this.animateHotPoint();
+
     }
+
 
     toggleDisplayWelcome(){
 
@@ -169,34 +168,6 @@ export default class vrWorkplace extends React.Component {
         this.setState({menuCoordinates: mainMenuTranslateCoordinates})
     }
 
-    animateHotPoint() {
-        var delta = this.state.animationWidth + 0.002;
-        var radius = this.state.animationRadius + 10;
-        if (delta >= 0.13) {
-            delta = DEFAULT_ANIMATION_BUTTON_SIZE;
-            radius = DEFAULT_ANIMATION_BUTTON_RADIUS;
-        }
-        this.setState({animationWidth: delta, animationRadius: radius})
-        this.frameHandle = requestAnimationFrame(this.animateHotPoint);
-    }
-
-
-    hotPointEnter(e, item){
-        const now = Date.now();
-        const delta = now - this.lastUpdate;
-        this.lastUpdate = now;
-        this.setState({ hoverRotation: this.state.hoverRotation + delta / 2 });
-
-        this.frameHandle = requestAnimationFrame(this.hotPointEnter);
-
-
-    }
-
-    hotPointExit(e, item){
-
-        this.setState({hoverRotation: 0});
-        //this.frameHandle = requestAnimationFrame(this.hotPointExit);
-    }
     onNavigationClick(item, e) {
 
         var new_workplace = this.state.workplaces.find(i => i['id'] === item.id);
@@ -218,11 +189,6 @@ export default class vrWorkplace extends React.Component {
                 return <Point
                     key={i}
                     item={item}
-                    hotPointEnter={that.hotPointEnter}
-                    hotPointExit={that.hotPointExit}
-                    hoverRotation={that.state.hoverRotation}
-                    animationWidth={that.state.animationWidth}
-                    animationRadius={that.state.animationRadius}
                     currentWorkplace={that.state.current_workplace}
 
                     />

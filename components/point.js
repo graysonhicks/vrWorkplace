@@ -1,65 +1,95 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, VrButton } from 'react-vr';
+import { AppRegistry, Text, View, VrButton, Animated } from 'react-vr';
 import InfoPanel from './infopanel.js';
+
+const Easing = require('Easing');
+const DEFAULT_ANIMATION_BUTTON_RADIUS = 50;
+const DEFAULT_ANIMATION_BUTTON_SIZE = .13;
+
+var AnimatedButton = Animated.createAnimatedComponent(VrButton);
+
 
 export default class Point extends Component {
     constructor() {
-        super();
+    super();
 
-        this.state = { panelOn: false };
-        this.togglePanel = this.togglePanel.bind(this);
-      }
+    this.state = {
+        panelOn: false,
+        animationWidth: new Animated.Value(DEFAULT_ANIMATION_BUTTON_SIZE),
+        animationRadius: new Animated.Value(DEFAULT_ANIMATION_BUTTON_RADIUS)
+    };
 
-      togglePanel() {
-      this.setState({
-        panelOn: !this.state.panelOn
-      })
+    this.togglePanel = this.togglePanel.bind(this);
     }
 
-  render() {
-      var panel;
-            if(this.state.panelOn){
-                panel = <InfoPanel item={this.props.item}/>;
-            } else {
-                panel = null;
-            }
+    togglePanel() {
 
-            return (
-                <View>
-                   <VrButton onClick={this.togglePanel} onEnter={e => this.props.hotPointEnter(e, this.props.item)} onExit={e => this.props.hotPointExit(e, this.props.item)} style={{
-                       width: 0.15,
-                       height: 0.15,
-                       borderRadius: 50,
-                       justifyContent: 'center',
-                       alignItems: 'center',
-                       borderStyle: 'solid',
-                       borderColor: '#FFFFFF80',
-                       borderWidth: 0.01,
-                       transform: [
-                           {
-                               translate: this.props.item['translate']
-                           }, {
-                               rotateX: this.props.item['rotation'][0]
-                           }, {
-                               rotateY: this.props.hoverRotation
-                           },{
-                               rotateZ: this.props.item['rotation'][2]
-                           }
-                       ]
-                   }}>
-                       <VrButton style={{
-                           width: this.props.animationWidth,
-                           height: this.props.animationWidth,
-                           borderRadius: this.props.animationRadius,
-                           backgroundColor: '#FFFFFFD9',
-                       }}></VrButton>
-                   </VrButton>
+        this.setState({
+            panelOn: !this.state.panelOn
+        })
+    }
 
-                    {panel}
+    animateIn = () => {
 
-               </View>
+        Animated.timing(this.state.animationWidth, {
+            toValue: 0.05,
+            duration: 500,
+            easing: Easing. in
+        }).start();
 
-            );
+    }
+
+    animateOut = () => {
+        Animated.timing(this.state.animationWidth, {
+            toValue: .13,
+            duration: 100,
+            easing: Easing. in
+        }).start();
+    }
+
+    render() {
+        var panel;
+        if (this.state.panelOn) {
+            panel = <InfoPanel togglePanel={this.togglePanel} item={this.props.item}/>;
+        } else {
+            panel = null;
+        }
+
+        return (
+            <View>
+               <VrButton onClick={this.togglePanel} style={{
+                   width: 0.15,
+                   height: 0.15,
+                   borderRadius: 50,
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   borderStyle: 'solid',
+                   borderColor: '#FFFFFF80',
+                   borderWidth: 0.01,
+                   transform: [
+                       {
+                           translate: this.props.item['translate']
+                       }, {
+                           rotateX: this.props.item['rotation'][0]
+                       }, {
+                           rotateY: this.props.item['rotation'][1]
+                       },{
+                           rotateZ: this.props.item['rotation'][2]
+                       }
+                   ]
+               }}>
+                   <AnimatedButton onEnter={this.animateIn} onExit={this.animateOut}  style={{
+                       width: this.state.animationWidth,
+                       height: this.state.animationWidth,
+                       borderRadius: this.state.animationRadius,
+                       backgroundColor: '#FFFFFFD9',
+                   }}></AnimatedButton>
+           </VrButton>
+                {panel}
+
+           </View>
+
+        );
 
     }
 }
