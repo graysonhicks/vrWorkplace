@@ -3,9 +3,22 @@ import { AppRegistry, Plane, View, Text } from 'react-vr';
 
 
 export default class InfoPanel extends Component {
+    constructor(props) {
+    super();
+
+    }
+
+    togglePanel(e) {
+        if (e.nativeEvent.inputEvent.eventType === "mousedown" && e.nativeEvent.inputEvent.button === 0) {
+            this.props.togglePanel();
+        }
+    }
   render() {
+      if(!this.props.panelDisplay){
+          return null;
+      }
     return (
-        <View billboarding={'on'} style={{
+        <View onInput={e =>this.togglePanel(e)} billboarding={'on'} style={{
                 transform: [
                     {
                         translate: [this.props.item['translate'][0] +.25, this.props.item['translate'][1] +.25, this.props.item['translate'][2] + .25]
@@ -21,6 +34,7 @@ export default class InfoPanel extends Component {
             }}>
 
         <Plane
+
             dimWidth={1}
             dimHeight={1.5}
             style={{

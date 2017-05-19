@@ -10,7 +10,7 @@ var AnimatedButton = Animated.createAnimatedComponent(VrButton);
 
 
 export default class Point extends Component {
-    constructor() {
+    constructor(props) {
     super();
 
     this.state = {
@@ -48,13 +48,6 @@ export default class Point extends Component {
     }
 
     render() {
-        var panel;
-        if (this.state.panelOn) {
-            panel = <InfoPanel togglePanel={this.togglePanel} item={this.props.item}/>;
-        } else {
-            panel = null;
-        }
-
         return (
             <View>
                <VrButton onClick={this.togglePanel} style={{
@@ -85,7 +78,7 @@ export default class Point extends Component {
                        backgroundColor: '#FFFFFFD9',
                    }}></AnimatedButton>
            </VrButton>
-                {panel}
+                <InfoPanel panelDisplay={this.state.panelOn} togglePanel={this.togglePanel} item={this.props.item}/>
 
            </View>
 
