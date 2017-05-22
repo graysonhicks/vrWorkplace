@@ -12,7 +12,7 @@
                 position: absolute;
                 left: 50%;
                 top: 50%;
-                z-index: 1;
+                z-index: 2;
                 width: 150px;
                 height: 150px;
                 margin: -75px 0 0 -75px;
@@ -45,12 +45,34 @@
 
             #blur-container {
                 position: absolute;
-                top: 0px;
-                right: 0px;
-                bottom: 0px;
-                left: 0px;
-                filter: blur(10px);
-                background: rgba(34,34,34,0.5);
+                top: -100px;
+                right: -100px;
+                bottom: -100px;
+                left: -100px;
+                -webkit-filter: blur(100px);
+                filter: blur(100px);
+                background: rgba(0, 0, 0, 1);
+                z-index: 1;
+                -webkit-animation: opacity-in 30s ease 1;
+                animation: opacity-in 30s ease 1;
+            }
+
+            @-webkit-keyframes opacity-in {
+                0% {
+                    -webkit-opacity: 1;
+                }
+                100% {
+                    -webkit-opacity: 0;
+                }
+            }
+
+            @keyframes opacity-in {
+                0% {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 0;
+                }
             }
 
         </style>
@@ -60,8 +82,9 @@
 
 
     <body>
-        <div id="blur-container"></div>
+
         <div id="loader"></div>
+        <div id="blur-container"></div>
 
         <!-- When you're ready to deploy your app, update this line to point to your compiled client.bundle.js -->
         <script src="./client.bundle?platform=vr"></script>

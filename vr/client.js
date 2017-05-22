@@ -28,16 +28,20 @@ function onVRMessage(e) {
     switch (e.data.type) {
       case 'sceneChanged':
       document.getElementById('loader').style.display = 'block';
+      document.getElementById('blur-container').style.display = 'block';
       if (window.playerCamera.zoom != 1) {
         window.playerCamera.zoom = 1;
         window.playerCamera.updateProjectionMatrix();
       }
+
       break;
       case 'sceneLoadStart':
         document.getElementById('loader').style.display = 'block';
+        document.getElementById('blur-container').style.display = 'block';
       break;
       case 'sceneLoadEnd':
         document.getElementById('loader').style.display = 'none';
+        document.getElementById('blur-container').style.display = 'none';
       break;
       default:
       return;
