@@ -24,8 +24,10 @@ function init(bundle, parent, options) {
 }
 
 function onVRMessage(e) {
+    console.log(e.data.type);
     switch (e.data.type) {
       case 'sceneChanged':
+      document.getElementById('loader').style.display = 'block';
       if (window.playerCamera.zoom != 1) {
         window.playerCamera.zoom = 1;
         window.playerCamera.updateProjectionMatrix();

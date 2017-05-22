@@ -169,7 +169,9 @@ export default class vrWorkplace extends React.Component {
     }
 
     onNavigationClick(item, e) {
-
+        postMessage({
+                 type: "sceneChanged"
+             })
         var new_workplace = this.state.workplaces.find(i => i['id'] === item.id);
 
         if(this.state.current_workplace.id === 0){
