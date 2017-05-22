@@ -5,6 +5,7 @@
         <style>
             body {
                 margin: 0;
+                height: 100%;
             }
 
             #loader {
@@ -42,6 +43,38 @@
                 }
             }
 
+            #blur-container {
+                position: absolute;
+                top: -100px;
+                right: -100px;
+                bottom: -100px;
+                left: -100px;
+                -webkit-filter: blur(100px);
+                filter: blur(100px);
+                background: rgba(0, 0, 0, 1);
+                z-index: 1;
+                -webkit-animation: opacity-in 30s ease 1;
+                animation: opacity-in 30s ease 1;
+            }
+
+            @-webkit-keyframes opacity-in {
+                0% {
+                    -webkit-opacity: 1;
+                }
+                100% {
+                    -webkit-opacity: 0;
+                }
+            }
+
+            @keyframes opacity-in {
+                0% {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
@@ -49,6 +82,7 @@
 
     <body>
         <div id="loader"></div>
+        <div id="blur-container"></div>
         <!-- When you're ready to deploy your app, update this line to point to your compiled client.bundle.js -->
         <script src="./client.bundle.js?platform=vr"></script>
         <script>
