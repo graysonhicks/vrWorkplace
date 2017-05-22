@@ -29,7 +29,7 @@
 - home button to return to main menu from scene
 - ~~new main menu pano~~
 - maybe keep pano in state
-- close icon on panel to toggle
+- ~~close icon on panel to toggle~~
 - ~~animate hotpoints on hover (use Animate like this: https://www.sitepoint.com/building-a-full-sphere-3d-image-gallery-with-react-vr/)~~
 - ~~menu jump on hotpoint click bug~~
 - set correct rotations on hotpoints
