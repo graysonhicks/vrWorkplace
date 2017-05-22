@@ -5,6 +5,7 @@
         <style>
             body {
                 margin: 0;
+                height: 100%;
             }
 
             #loader {
@@ -42,6 +43,16 @@
                 }
             }
 
+            #blur-container {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                filter: blur(10px);
+                background: rgba(34,34,34,0.5);
+            }
+
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
@@ -49,7 +60,7 @@
 
 
     <body>
-
+        <div id="blur-container"></div>
         <div id="loader"></div>
 
         <!-- When you're ready to deploy your app, update this line to point to your compiled client.bundle.js -->
