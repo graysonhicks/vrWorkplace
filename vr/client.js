@@ -24,7 +24,7 @@ function init(bundle, parent, options) {
 }
 
 function onVRMessage(e) {
-    console.log(e.data.type);
+
     switch (e.data.type) {
       case 'sceneChanged':
       document.getElementById('loader').style.display = 'block';

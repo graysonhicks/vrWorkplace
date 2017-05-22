@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Plane, View, Text } from 'react-vr';
 
-
 export default class InfoPanel extends Component {
     constructor(props) {
     super();
@@ -18,7 +17,7 @@ export default class InfoPanel extends Component {
           return null;
       }
     return (
-        <View onInput={e =>this.togglePanel(e)} billboarding={'on'} style={{
+        <View billboarding={'on'} style={{
                 transform: [
                     {
                         translate: [this.props.item['translate'][0] +.25, this.props.item['translate'][1] +.25, this.props.item['translate'][2] + .25]
@@ -40,7 +39,13 @@ export default class InfoPanel extends Component {
             style={{
                 color:'#FFFFFFD9'
             }}>
-            <Text style={{color:'black', textAlign:'center'}}>{this.props.item.text}</Text>
+            <View onInput={e =>this.togglePanel(e)} style={{position: 'relative', top: -.05, width: .9}}>
+                <Text style={{color:'black', textAlign:'right'}}>X</Text>
+            </View>
+            <View style={{position: 'relative', width: .9}}>
+                <Text style={{color:'black', textAlign:'center'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Text>
+            </View>
+
         </Plane>
             </View>
 
