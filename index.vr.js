@@ -2,12 +2,11 @@ import React from 'react';
 import {
     AppRegistry,
     asset,
-    StyleSheet,
     Pano,
     Text,
     View,
-    VrButton,
-    Plane
+    Plane,
+    Image
 } from 'react-vr';
 
 
@@ -167,7 +166,6 @@ export default class vrWorkplace extends React.Component {
 
         if(this.state.current_workplace.id === 0){
             this.toggleDisplayHomepage();
-            this.centerMenu();
         }
 
         this.setState({current_workplace: new_workplace});
@@ -187,7 +185,20 @@ export default class vrWorkplace extends React.Component {
                     />
             })
 
-            return hotPoints;
+            return (
+            <View>
+                <Image source={asset('home.png')}
+                    style={{
+                        width: .5,
+                        height: .5,
+                        transform: [
+                            {translate: [0, .5, -3]}
+                        ]
+                    }}/>
+                {hotPoints}
+            </View>
+
+            );
         }
     }
 

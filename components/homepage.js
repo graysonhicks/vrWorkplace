@@ -21,15 +21,15 @@ export default class Homepage extends Component {
         Animated.sequence([
             Animated.timing(this.state.welcomeAnimationOpacity, {
                 toValue: 1,
-                duration: 2500
+                duration: 1000
             }),
             Animated.timing(this.state.welcomeAnimationOpacity, {
                 toValue: 0,
-                duration: 2500
+                duration: 1000
             }),
             Animated.timing(this.state.menuAnimationOpacity, {
                 toValue: 1,
-                duration: 2500
+                duration: 1000
             })
         ]).start();
 
