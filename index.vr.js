@@ -12,8 +12,8 @@ import {
 
 
 import Point from './components/point.js';
-import Welcome from './components/welcome.js';
-import Menu from './components/menu.js';
+import Homepage from './components/homepage.js';
+
 
 export default class vrWorkplace extends React.Component {
 
@@ -208,11 +208,7 @@ export default class vrWorkplace extends React.Component {
     testHomepage(){
         if(this.state.displayWelcome){
             return(
-                <View>
-                    <Welcome />
-                    <Menu workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} menuCoordinates={this.state.menuCoordinates}/>
-                </View>
-
+                <Homepage workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} menuCoordinates={this.state.menuCoordinates}/>
             )
         } else {
             return <View></View>;

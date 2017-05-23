@@ -11,7 +11,6 @@ export default class Menu extends Component {
 
     }
 
-
     buildButtons(){
         var that = this;
         var buttons = this.props.workplaces.filter(item => item.id !== 0).map(function(item, i) {
