@@ -23,7 +23,7 @@
 ### To Do
 - ~~inital loading animation~~
 - ~~loading animation for pano image changes~~
-- make welcome text its own Component, `<Welcome />`
+- ~~make welcome text its own Component, `<Welcome />`~~
 - fade `<Welcome />` in and out on page load, remove from click events
 - animate main menu slide over when leaving homepage
 - home button to return to main menu from scene

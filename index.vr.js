@@ -12,7 +12,8 @@ import {
 
 
 import Point from './components/point.js';
-import Button from './components/button.js';
+import Welcome from './components/welcome.js';
+import Menu from './components/menu.js';
 
 export default class vrWorkplace extends React.Component {
 
@@ -24,7 +25,7 @@ export default class vrWorkplace extends React.Component {
         this.state = {
 
             displayWelcome: true,
-            menuCoordinates: [1.5, 2, -5],
+            menuCoordinates: [-1, 2, -5],
             workplaces: [
                 {
                     id: 0,
@@ -132,7 +133,7 @@ export default class vrWorkplace extends React.Component {
 
         this.onNavigationClick = this.onNavigationClick.bind(this);
         this.toggleDisplayWelcome = this.toggleDisplayWelcome.bind(this);
-        this.testWelcome = this.testWelcome.bind(this);
+        this.testHomepage = this.testHomepage.bind(this);
         this.centerMenu = this.centerMenu.bind(this);
         this.shiftMenu = this.shiftMenu.bind(this);
     }
@@ -160,18 +161,18 @@ export default class vrWorkplace extends React.Component {
 
         var sceneMenuTranslateCoordinates = [-1, 2, -5];
 
-        this.setState({menuCoordinates: sceneMenuTranslateCoordinates})
+        //this.setState({menuCoordinates: sceneMenuTranslateCoordinates})
     }
 
     shiftMenu() {
         var mainMenuTranslateCoordinates = [1.5, 2, -5];
-        this.setState({menuCoordinates: mainMenuTranslateCoordinates})
+        //this.setState({menuCoordinates: mainMenuTranslateCoordinates})
     }
 
     onNavigationClick(item, e) {
 
         var new_workplace = this.state.workplaces.find(i => i['id'] === item.id);
-        
+
         if(new_workplace != this.state.current_workplace){
             postMessage({
                      type: "sceneChanged"
@@ -204,39 +205,15 @@ export default class vrWorkplace extends React.Component {
         }
     }
 
-    buildButtons() {
-        var that = this;
-        var buttons = this.state.workplaces.filter(item => item.id !== 0).map(function(item, i) {
-
-            return <Button
-                    key={i}
-                    item={item}
-                    onNavigationClick={that.onNavigationClick}
-                    />
-        });
-
-        return buttons;
-    }
-
-    testWelcome(){
+    testHomepage(){
         if(this.state.displayWelcome){
-            return(<View style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            width: 10,
-                            alignItems: 'center',
-                            transform: [
-                                {
-                                    translate: [-4, 0, -5]
-                                }
-                            ]
-                        }}>
-                                <Text style={{
-                                    fontSize: .5,
-                                    textAlign: 'center',
-                                    fontWeight: 'bold'
-                                }}>Weclome to vrWorkplace</Text>
-                        </View>)
+            return(
+                <View>
+                    <Welcome />
+                    <Menu workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} menuCoordinates={this.state.menuCoordinates}/>
+                </View>
+
+            )
         } else {
             return <View></View>;
         }
@@ -254,8 +231,7 @@ export default class vrWorkplace extends React.Component {
     render() {
 
         var hotPoints = this.buildHotpoints();
-        var buttons = this.buildButtons();
-        var welcome = this.testWelcome();
+        var homepage = this.testHomepage();
 
 
         return (
@@ -263,38 +239,9 @@ export default class vrWorkplace extends React.Component {
 
                 <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
 
-
                 {hotPoints}
 
-                {welcome}
-
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    width: 2,
-                    alignItems: 'stretch',
-                    transform: [
-                        {
-                            translate: this.state.menuCoordinates
-                        }
-                    ]
-                }}>
-
-                    <View style={{
-                        margin: 0.3,
-                        height: 0.3,
-                        backgroundColor: 'transparent'
-                    }}>
-                        <Text style={{
-                            fontSize: 0.2,
-                            textAlign: 'center',
-                            fontWeight: 'bold'
-                        }}>Choose Your Workplace</Text>
-                    </View>
-
-                {buttons}
-
-                </View>
+                {homepage}
 
             </View>
 

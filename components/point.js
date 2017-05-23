@@ -34,7 +34,7 @@ export default class Point extends Component {
         Animated.timing(this.state.animationWidth, {
             toValue: 0.05,
             duration: 500,
-            easing: Easing. in
+            easing: Easing.in
         }).start();
 
     }
@@ -43,7 +43,7 @@ export default class Point extends Component {
         Animated.timing(this.state.animationWidth, {
             toValue: .13,
             duration: 100,
-            easing: Easing. in
+            easing: Easing.in
         }).start();
     }
 
