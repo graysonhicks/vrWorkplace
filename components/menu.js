@@ -3,8 +3,6 @@ import { AppRegistry, Text, View, Animated } from 'react-vr';
 
 import Button from './button.js';
 
-const Easing = require('Easing');
-
 export default class Menu extends Component {
     constructor(props) {
         super();
@@ -31,14 +29,15 @@ export default class Menu extends Component {
       var buttons = this.buildButtons();
 
     return (
-        <View style={{
+        <Animated.View style={{
             flex: 1,
             flexDirection: 'column',
             width: 2,
             alignItems: 'stretch',
+            opacity: this.props.opacity,
             transform: [
                 {
-                    translate: this.props.menuCoordinates
+                    translate: [-1, 2, -5]
                 }
             ]
         }}>
@@ -55,7 +54,7 @@ export default class Menu extends Component {
                 }}>Choose Your Workplace</Text>
             </View>
             {buttons}
-        </View>
+        </Animated.View>
     );
   }
 

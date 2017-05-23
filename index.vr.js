@@ -24,8 +24,7 @@ export default class vrWorkplace extends React.Component {
 
         this.state = {
 
-            displayWelcome: true,
-            menuCoordinates: [-1, 2, -5],
+            displayHomepage: true,
             workplaces: [
                 {
                     id: 0,
@@ -33,7 +32,7 @@ export default class vrWorkplace extends React.Component {
                     panoImage: 'space.jpg'
                 }, {
                     id: 1,
-                    workplace: 'office',
+                    workplace: 'OFFICE',
                     buttonColor: '#00aeff',
                     panoImage: 'office.jpg',
                     hotPoints: [
@@ -65,7 +64,7 @@ export default class vrWorkplace extends React.Component {
                     ]
                 }, {
                     id: 2,
-                    workplace: 'farm',
+                    workplace: 'FARM',
                     buttonColor: '#9873c1',
                     panoImage: 'farm.jpg',
                     hotPoints: [
@@ -97,7 +96,7 @@ export default class vrWorkplace extends React.Component {
                     ]
                 }, {
                     id: 3,
-                    workplace: 'hotel',
+                    workplace: 'HOTEL',
                     buttonColor: '#fe7a9b',
                     panoImage: 'hotel.jpg',
                     hotPoints: [
@@ -132,10 +131,9 @@ export default class vrWorkplace extends React.Component {
         };
 
         this.onNavigationClick = this.onNavigationClick.bind(this);
-        this.toggleDisplayWelcome = this.toggleDisplayWelcome.bind(this);
+        this.toggleDisplayHomepage = this.toggleDisplayHomepage.bind(this);
         this.testHomepage = this.testHomepage.bind(this);
-        this.centerMenu = this.centerMenu.bind(this);
-        this.shiftMenu = this.shiftMenu.bind(this);
+
     }
 
     componentWillMount() {
@@ -150,23 +148,11 @@ export default class vrWorkplace extends React.Component {
     }
 
 
-    toggleDisplayWelcome(){
+    toggleDisplayHomepage(){
 
         this.setState({
-            displayWelcome: !this.state.displayWelcome
+            displayHomepage: !this.state.displayHomepage
         })
-    }
-
-    centerMenu() {
-
-        var sceneMenuTranslateCoordinates = [-1, 2, -5];
-
-        //this.setState({menuCoordinates: sceneMenuTranslateCoordinates})
-    }
-
-    shiftMenu() {
-        var mainMenuTranslateCoordinates = [1.5, 2, -5];
-        //this.setState({menuCoordinates: mainMenuTranslateCoordinates})
     }
 
     onNavigationClick(item, e) {
@@ -180,7 +166,7 @@ export default class vrWorkplace extends React.Component {
         }
 
         if(this.state.current_workplace.id === 0){
-            this.toggleDisplayWelcome();
+            this.toggleDisplayHomepage();
             this.centerMenu();
         }
 
@@ -206,9 +192,9 @@ export default class vrWorkplace extends React.Component {
     }
 
     testHomepage(){
-        if(this.state.displayWelcome){
+        if(this.state.displayHomepage){
             return(
-                <Homepage workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} menuCoordinates={this.state.menuCoordinates}/>
+                <Homepage workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} />
             )
         } else {
             return <View></View>;

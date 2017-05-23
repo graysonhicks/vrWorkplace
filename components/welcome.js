@@ -4,25 +4,9 @@ import { AppRegistry, Text, View, Animated } from 'react-vr';
 
 export default class Welcome extends Component {
     constructor(props) {
-    super(props);
+    super();
 
-        this.state = {
-            animationOpacity: new Animated.Value(0)
-        };
 
-    }
-
-    componentDidMount(){
-        Animated.sequence([
-            Animated.timing(this.state.animationOpacity, {
-                toValue: 1,
-                duration: 5000
-            }),
-            Animated.timing(this.state.animationOpacity, {
-                toValue: 0,
-                duration: 2500
-            })
-        ]).start();
 
     }
 
@@ -34,7 +18,7 @@ export default class Welcome extends Component {
                         flex: 1,
                         flexDirection: 'row',
                         width: 10,
-                        opacity: this.state.animationOpacity,
+                        opacity: this.props.opacity,
                         alignItems: 'center',
                         transform: [
                             {
