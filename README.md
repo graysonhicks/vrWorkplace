@@ -28,6 +28,7 @@
 - ~~`<Homepage />` component to hold and animate `<Welcome />` and `<Menu />`~~
 - animate main menu slide over when leaving homepage
 - home button to return to main menu from scene
+- main menu as select/options instead of buttons
 - ~~new main menu pano~~
 - maybe keep pano in state
 - ~~close icon on panel to toggle~~

@@ -4,14 +4,11 @@ import {
     asset,
     Pano,
     Text,
-    View,
-    Plane,
-    Image
+    View
 } from 'react-vr';
 
-
-import Point from './components/point.js';
 import Homepage from './components/homepage.js';
+import Scene from './components/scene.js';
 
 
 export default class vrWorkplace extends React.Component {
@@ -131,7 +128,7 @@ export default class vrWorkplace extends React.Component {
 
         this.onNavigationClick = this.onNavigationClick.bind(this);
         this.toggleDisplayHomepage = this.toggleDisplayHomepage.bind(this);
-        this.testHomepage = this.testHomepage.bind(this);
+        this.testHomepageOrScene = this.testHomepageOrScene.bind(this);
 
     }
 
@@ -171,44 +168,17 @@ export default class vrWorkplace extends React.Component {
         this.setState({current_workplace: new_workplace});
 
     }
-    buildHotpoints() {
-        var that = this;
 
-        if (this.state.current_workplace.id !== 0) {
-            var hotPoints = this.state.current_workplace['hotPoints'].map(function(item, i) {
 
-                return <Point
-                    key={i}
-                    item={item}
-                    currentWorkplace={that.state.current_workplace}
-
-                    />
-            })
-
-            return (
-            <View>
-                <Image source={asset('home.png')}
-                    style={{
-                        width: .5,
-                        height: .5,
-                        transform: [
-                            {translate: [0, .5, -3]}
-                        ]
-                    }}/>
-                {hotPoints}
-            </View>
-
-            );
-        }
-    }
-
-    testHomepage(){
+    testHomepageOrScene(){
         if(this.state.displayHomepage){
             return(
                 <Homepage workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} />
             )
         } else {
-            return <View></View>;
+            return (
+                <Scene current_workplace={this.state.current_workplace} />
+            );
         }
     }
     sceneOnLoad() {
@@ -223,8 +193,7 @@ export default class vrWorkplace extends React.Component {
 
     render() {
 
-        var hotPoints = this.buildHotpoints();
-        var homepage = this.testHomepage();
+        var homepageOrScene = this.testHomepageOrScene();
 
 
         return (
@@ -232,9 +201,7 @@ export default class vrWorkplace extends React.Component {
 
                 <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
 
-                {hotPoints}
-
-                {homepage}
+                {homepageOrScene}
 
             </View>
 
