@@ -21,20 +21,23 @@
 - you should not have to checkout/merge/alter on the gh-pages directly as long as this process is done correctly, otherwise can cause failures
 
 ### To Do
+- main menu as select/options instead of buttons
+- move homelink to client js to allow for fixed position like 'full screen' and direction buttons
+- reset camera position on scene changes
+- set correct rotations on hotpoints
+- animate main menu slide over when leaving homepage
+- maybe keep pano in state
+- fetch data remotely
 - ~~inital loading animation~~
 - ~~loading animation for pano image changes~~
 - ~~make welcome text its own Component, `<Welcome />`~~
 - ~~fade `<Welcome />` in and out on page load, remove from click events~~
 - ~~`<Homepage />` component to hold and animate `<Welcome />` and `<Menu />`~~
-- animate main menu slide over when leaving homepage
-- home button to return to main menu from scene
-- main menu as select/options instead of buttons
+- ~~home button to return to main menu from scene~~
 - ~~new main menu pano~~
-- maybe keep pano in state
 - ~~close icon on panel to toggle~~
 - ~~animate hotpoints on hover (use Animate like this: https://www.sitepoint.com/building-a-full-sphere-3d-image-gallery-with-react-vr/)~~
 - ~~menu jump on hotpoint click bug~~
-- set correct rotations on hotpoints
 - ~~set translates on hotpoints to be equidistant from perspective~~
 - ~~show info panel on hotpoints click~~
 - ~~refactor buttons and hotpoints to individual component files~~

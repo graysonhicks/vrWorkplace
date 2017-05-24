@@ -32,6 +32,7 @@ function onVRMessage(e) {
           document.getElementById('loader').style.display = 'block';
           document.getElementById('blur-container').style.display = 'block';
           console.log(window.playerCamera);
+          window.playerCamera.updateProjectionMatrix();
           if (window.playerCamera.zoom != 1) {
             window.playerCamera.zoom = 1;
 
