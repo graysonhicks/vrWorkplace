@@ -8,7 +8,7 @@ import {
 } from 'react-vr';
 
 import Homepage from './components/homepage.js';
-import Scene from './components/scene.js';
+import Workplace from './components/workplace.js';
 
 
 export default class vrWorkplace extends React.Component {
@@ -67,25 +67,25 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                0.5, 1, 3.5
+                                1.5, .75, -3.5
                             ],
-                            rotation: [0, 0, 0],
+                            rotation: [0, -40, 0],
                             panelOn: false,
                             index: 0
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                0.5, .5, -3.5
+                                3, 0, 3.5
                             ],
-                            rotation: [0, 0, 0],
+                            rotation: [0, -120, 0],
                             panelOn: false,
                             index: 1
                         }, {
                             text: "Third hotpoint!",
                             translate: [
-                                0.5, 1, 3.5
+                                0.5, 0, 3.5
                             ],
-                            rotation: [0, 0, 0],
+                            rotation: [0, 180, 0],
                             panelOn: false,
                             index: 2
                         }
@@ -99,25 +99,25 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                0.5, 0.05, -3.5
+                                1.5, .75, -3.5
                             ],
-                            rotation: [0, 0, 0],
+                            rotation: [0, -40, 0],
                             panelOn: false,
                             index: 0
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                0.5, 0, 3.5
+                                3, 0, 3.5
                             ],
-                            rotation: [0, 0, 0],
+                            rotation: [0, -120, 0],
                             panelOn: false,
                             index: 1
                         }, {
                             text: "Third hotpoint!",
                             translate: [
-                                0.5, 3, 3.5
+                                0.5, 0, 3.5
                             ],
-                            rotation: [0, 0, 0],
+                            rotation: [0, 180, 0],
                             panelOn: false,
                             index: 2
                         }
@@ -128,7 +128,8 @@ export default class vrWorkplace extends React.Component {
 
         this.onNavigationClick = this.onNavigationClick.bind(this);
         this.toggleDisplayHomepage = this.toggleDisplayHomepage.bind(this);
-        this.testHomepageOrScene = this.testHomepageOrScene.bind(this);
+        this.onHomeLinkClick = this.onHomeLinkClick.bind(this);
+        this.testHomepageOrWorkplace = this.testHomepageOrWorkplace.bind(this);
 
     }
 
@@ -169,15 +170,28 @@ export default class vrWorkplace extends React.Component {
 
     }
 
+    onHomeLinkClick(){
 
-    testHomepageOrScene(){
+        var new_workplace = this.state.workplaces[0];
+
+        postMessage({
+                 type: "sceneChanged"
+             })
+
+        this.toggleDisplayHomepage();
+
+        this.setState({current_workplace: new_workplace});
+    }
+
+
+    testHomepageOrWorkplace(){
         if(this.state.displayHomepage){
             return(
                 <Homepage workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} />
             )
         } else {
             return (
-                <Scene current_workplace={this.state.current_workplace} />
+                <Workplace current_workplace={this.state.current_workplace} onHomeLinkClick={this.onHomeLinkClick}/>
             );
         }
     }
@@ -193,15 +207,14 @@ export default class vrWorkplace extends React.Component {
 
     render() {
 
-        var homepageOrScene = this.testHomepageOrScene();
-
+        var homepageOrWorkplace = this.testHomepageOrWorkplace();
 
         return (
             <View>
 
                 <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
 
-                {homepageOrScene}
+                {homepageOrWorkplace}
 
             </View>
 

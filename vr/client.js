@@ -20,6 +20,8 @@ function init(bundle, parent, options) {
   vr.rootView.context.worker.addEventListener('message', onVRMessage);
   // Begin the animation loop
   vr.start();
+  window.playerCamera = vr.player._camera;
+  window.vr = vr;
   return vr;
 }
 
@@ -27,12 +29,15 @@ function onVRMessage(e) {
 
     switch (e.data.type) {
       case 'sceneChanged':
-      document.getElementById('loader').style.display = 'block';
-      document.getElementById('blur-container').style.display = 'block';
-      if (window.playerCamera.zoom != 1) {
-        window.playerCamera.zoom = 1;
-        window.playerCamera.updateProjectionMatrix();
-      }
+          document.getElementById('loader').style.display = 'block';
+          document.getElementById('blur-container').style.display = 'block';
+          console.log(window.playerCamera);
+          if (window.playerCamera.zoom != 1) {
+            window.playerCamera.zoom = 1;
+
+            window.playerCamera.updateProjectionMatrix();
+          }
+
 
       break;
       case 'sceneLoadStart':

@@ -4,10 +4,10 @@ import { AppRegistry, View, asset } from 'react-vr';
 import HomeLink from './homelink.js';
 import Point from './point.js';
 
-export default class Scene extends Component {
+export default class Workplace extends Component {
     constructor(props) {
         super();
-    
+
     }
     buildHotpoints() {
         var that = this;
@@ -33,7 +33,7 @@ export default class Scene extends Component {
 
         return (
         <View>
-            <HomeLink></HomeLink>
+            <HomeLink onHomeLinkClick={this.props.onHomeLinkClick} />
             {hotPoints}
         </View>
 
@@ -41,4 +41,4 @@ export default class Scene extends Component {
   }
 }
 
-AppRegistry.registerComponent('Scene', () => Scene);
+AppRegistry.registerComponent('Workplace', () => Workplace);
