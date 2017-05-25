@@ -22,6 +22,7 @@ function init(bundle, parent, options) {
   vr.start();
   window.playerCamera = vr.player._camera;
   window.vr = vr;
+
   return vr;
 }
 
@@ -31,11 +32,10 @@ function onVRMessage(e) {
       case 'sceneChanged':
           document.getElementById('loader').style.display = 'block';
           document.getElementById('blur-container').style.display = 'block';
+          window.vr.player.resetAngles();
           console.log(window.playerCamera);
-          window.playerCamera.updateProjectionMatrix();
           if (window.playerCamera.zoom != 1) {
             window.playerCamera.zoom = 1;
-
             window.playerCamera.updateProjectionMatrix();
           }
 

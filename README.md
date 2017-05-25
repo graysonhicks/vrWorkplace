@@ -23,7 +23,7 @@
 ### To Do
 - main menu as select/options instead of buttons
 - move homelink to client js to allow for fixed position like 'full screen' and direction buttons
-- reset camera position on scene changes
+- ~~reset camera position on scene changes~~
 - set correct rotations on hotpoints
 - animate main menu slide over when leaving homepage
 - maybe keep pano in state

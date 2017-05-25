@@ -4,7 +4,8 @@ import {
     asset,
     Pano,
     Text,
-    View
+    View,
+    Scene
 } from 'react-vr';
 
 import Homepage from './components/homepage.js';
@@ -210,14 +211,15 @@ export default class vrWorkplace extends React.Component {
         var homepageOrWorkplace = this.testHomepageOrWorkplace();
 
         return (
-            <View>
 
-                <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
+                <View>
 
-                {homepageOrWorkplace}
+                    <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
 
-            </View>
+                    {homepageOrWorkplace}
 
+                </View>
+        
         );
     }
 };
