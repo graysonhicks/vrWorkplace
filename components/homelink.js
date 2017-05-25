@@ -41,6 +41,7 @@ export default class HomeLink extends Component {
             height: 0.25,
             justifyContent: 'center',
             alignItems: 'center',
+            position: 'absolute',
             transform: [
                 {translate: [0, .5, -3]},
                 {scale: this.state.animationScale}

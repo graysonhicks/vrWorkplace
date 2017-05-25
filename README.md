@@ -25,7 +25,6 @@
 - move homelink to client js to allow for fixed position like 'full screen' and direction buttons
 - ~~reset camera position on scene changes~~
 - set correct rotations on hotpoints
-- animate main menu slide over when leaving homepage
 - maybe keep pano in state
 - fetch data remotely
 - ~~inital loading animation~~

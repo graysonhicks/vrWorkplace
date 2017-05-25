@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { AppRegistry, Plane, View, Text } from 'react-vr';
 
+const PANEL_OFFSET = .5;
+
 export default class InfoPanel extends Component {
     constructor(props) {
-    super();
+        super(props);
 
+    }
+
+    componentWillMount(){
+        console.log(this.props);
+        if(this.props.item['translate'][0] > 0){
+            PANEL_OFFSET = -.5;
+        }
     }
 
     togglePanel(e) {
@@ -12,15 +21,16 @@ export default class InfoPanel extends Component {
             this.props.togglePanel();
         }
     }
-  render() {
+    render() {
       if(!this.props.panelDisplay){
           return null;
-      }
+    }
+
     return (
         <View billboarding={'on'} style={{
                 transform: [
                     {
-                        translate: [this.props.item['translate'][0] +.25, this.props.item['translate'][1] +.25, this.props.item['translate'][2] + .25]
+                        translate: [this.props.item['translate'][0] + PANEL_OFFSET, this.props.item['translate'][1] + .25, this.props.item['translate'][2] + .25]
                     }, {
                         rotateX: this.props.item['rotation'][0]
                     }, {
@@ -32,21 +42,20 @@ export default class InfoPanel extends Component {
                 position: 'absolute'
             }}>
 
-        <Plane
+            <Plane
+                dimWidth={1}
+                dimHeight={1.5}
+                style={{
+                    color:'#FFFFFFD9'
+                }}>
+                <View onInput={e =>this.togglePanel(e)} style={{position: 'relative', top: -.05, width: .9}}>
+                    <Text style={{color:'black', textAlign:'right'}}>X</Text>
+                </View>
+                <View style={{position: 'relative', width: .9}}>
+                    <Text style={{color:'black', textAlign:'center'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Text>
+                </View>
 
-            dimWidth={1}
-            dimHeight={1.5}
-            style={{
-                color:'#FFFFFFD9'
-            }}>
-            <View onInput={e =>this.togglePanel(e)} style={{position: 'relative', top: -.05, width: .9}}>
-                <Text style={{color:'black', textAlign:'right'}}>X</Text>
-            </View>
-            <View style={{position: 'relative', width: .9}}>
-                <Text style={{color:'black', textAlign:'center'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Text>
-            </View>
-
-        </Plane>
+            </Plane>
             </View>
 
     );

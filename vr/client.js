@@ -5,13 +5,13 @@
 // Auto-generated content.
 import {VRInstance} from 'react-vr-web';
 
+
 function init(bundle, parent, options) {
   const vr = new VRInstance(bundle, 'vrWorkplace', parent, {
     // Add custom options here
 
     ...options,
   });
-
 
   vr.render = function() {
     // Any custom behavior you want to perform on each frame goes here
@@ -33,7 +33,7 @@ function onVRMessage(e) {
           document.getElementById('loader').style.display = 'block';
           document.getElementById('blur-container').style.display = 'block';
           window.vr.player.resetAngles();
-          console.log(window.playerCamera);
+
           if (window.playerCamera.zoom != 1) {
             window.playerCamera.zoom = 1;
             window.playerCamera.updateProjectionMatrix();

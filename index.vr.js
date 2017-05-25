@@ -36,7 +36,7 @@ export default class vrWorkplace extends React.Component {
                         {
                             text: "This is a hotpoint!",
                             translate: [
-                                1.5, .75, -3.5
+                                3, 0, -3
                             ],
                             rotation: [0, -40, 0],
                             panelOn: false,
@@ -44,7 +44,7 @@ export default class vrWorkplace extends React.Component {
                         }, {
                             text: "Second hotpoint!",
                             translate: [
-                                3, 0, 3.5
+                                3, 0, 3
                             ],
                             rotation: [0, -120, 0],
                             panelOn: false,
@@ -52,7 +52,7 @@ export default class vrWorkplace extends React.Component {
                         }, {
                             text: "Third hotpoint!",
                             translate: [
-                                0.5, 0, 3.5
+                                0, 0, 3
                             ],
                             rotation: [0, 180, 0],
                             panelOn: false,
@@ -219,7 +219,7 @@ export default class vrWorkplace extends React.Component {
                     {homepageOrWorkplace}
 
                 </View>
-        
+
         );
     }
 };
