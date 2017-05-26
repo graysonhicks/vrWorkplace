@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Plane, View, Text } from 'react-vr';
+import { AppRegistry, Plane, View, Text, Image, asset } from 'react-vr';
 
 const PANEL_OFFSET_X = .5;
 const PANEL_OFFSET_Y = .5;
@@ -68,10 +68,13 @@ export default class InfoPanel extends Component {
                 style={{
                     color:'#FFFFFFD9'
                 }}>
-                <View onInput={e =>this.togglePanel(e)} style={{position: 'relative', top: .05, width: .9}}>
-                    <Text style={{color:'black', textAlign:'right'}}>X</Text>
+                <View style={{width: .9, marginBottom: .05, marginTop: .05, alignItems: 'flex-end'}}>
+                    <View onInput={e =>this.togglePanel(e)} style={{width: .1, height: .1, justifyContent: 'flex-end'}}>
+                        <Image source={asset('close.png')} style={{width: .1, height: .1}}></Image>
+                    </View>
                 </View>
-                <View style={{position: 'relative', width: .9, height:1.4}}>
+
+                <View style={{width: .9, height:1.4}}>
                     <Text style={{color:'black', textAlign:'center'}}>{this.props.item.text}</Text>
                 </View>
 
