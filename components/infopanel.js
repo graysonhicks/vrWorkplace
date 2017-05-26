@@ -1,19 +1,39 @@
 import React, { Component } from 'react';
 import { AppRegistry, Plane, View, Text } from 'react-vr';
 
-const PANEL_OFFSET = .5;
+const PANEL_OFFSET_X = .5;
+const PANEL_OFFSET_Y = .5;
+const PANEL_OFFSET_Z = 1;
 
 export default class InfoPanel extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            PANEL_OFFSET_X: .25,
+            PANEL_OFFSET_Y: .25,
+            PANEL_OFFSET_Z: .25
+        }
     }
 
     componentWillMount(){
-        console.log(this.props);
-        if(this.props.item['translate'][0] > 0){
-            PANEL_OFFSET = -.5;
+        this.setOffsets(this.props);
+
+    }
+
+    setOffsets(props){
+        if(props.item['translate'][0] > 0){
+            PANEL_OFFSET_X = -.25;
         }
+        if(props.item['translate'][2] > 0){
+            PANEL_OFFSET_Z = -.25;
+        }
+
+        this.setState({
+            PANEL_OFFSET_X: props.item['translate'][0] + PANEL_OFFSET_X,
+            PANEL_OFFSET_Y: props.item['translate'][1] + PANEL_OFFSET_Y,
+            PANEL_OFFSET_Z: props.item['translate'][2] + PANEL_OFFSET_Z,
+        });
     }
 
     togglePanel(e) {
@@ -30,7 +50,7 @@ export default class InfoPanel extends Component {
         <View billboarding={'on'} style={{
                 transform: [
                     {
-                        translate: [this.props.item['translate'][0] + PANEL_OFFSET, this.props.item['translate'][1] + .25, this.props.item['translate'][2] + .25]
+                        translate: [this.state.PANEL_OFFSET_X, this.state.PANEL_OFFSET_Y, this.state.PANEL_OFFSET_Z]
                     }, {
                         rotateX: this.props.item['rotation'][0]
                     }, {
@@ -48,11 +68,11 @@ export default class InfoPanel extends Component {
                 style={{
                     color:'#FFFFFFD9'
                 }}>
-                <View onInput={e =>this.togglePanel(e)} style={{position: 'relative', top: -.05, width: .9}}>
+                <View onInput={e =>this.togglePanel(e)} style={{position: 'relative', top: .05, width: .9}}>
                     <Text style={{color:'black', textAlign:'right'}}>X</Text>
                 </View>
-                <View style={{position: 'relative', width: .9}}>
-                    <Text style={{color:'black', textAlign:'center'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Text>
+                <View style={{position: 'relative', width: .9, height:1.4}}>
+                    <Text style={{color:'black', textAlign:'center'}}>{this.props.item.text}</Text>
                 </View>
 
             </Plane>

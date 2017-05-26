@@ -77,8 +77,8 @@ export default class Point extends Component {
                        borderRadius: this.state.animationRadius,
                        backgroundColor: '#FFFFFFD9',
                    }}></AnimatedButton>
-           </VrButton>
-                <InfoPanel panelDisplay={this.state.panelOn} togglePanel={this.togglePanel} item={this.props.item}/>
+               </VrButton>
+              <InfoPanel panelDisplay={this.state.panelOn} togglePanel={this.togglePanel} item={this.props.item}/>
 
            </View>
 
