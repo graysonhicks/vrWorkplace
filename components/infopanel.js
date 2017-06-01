@@ -68,7 +68,7 @@ export default class InfoPanel extends Component {
                 style={{
                     color:'#FFFFFFD9'
                 }}>
-                <View style={{width: .9, marginBottom: .05, marginTop: .05, alignItems: 'flex-end'}}>
+                <View style={{width: .9, marginBottom: .05, marginTop: .15, alignItems: 'flex-end'}}>
                     <View onInput={e =>this.togglePanel(e)} style={{width: .1, height: .1, justifyContent: 'flex-end'}}>
                         <Image source={asset('close.png')} style={{width: .1, height: .1}}></Image>
                     </View>
