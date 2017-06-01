@@ -26,7 +26,8 @@
 - ~~reset camera position on scene changes~~
 - set correct rotations on hotpoints
 - maybe keep pano in state
-- ~~fetch data remotely~~
+- fetch data remotely from json in deploy/production mode
+- ~~fetch data remotely from json (locally)~~
 - ~~inital loading animation~~
 - ~~loading animation for pano image changes~~
 - ~~make welcome text its own Component, `<Welcome />`~~
