@@ -1,8 +1,6 @@
 import React from 'react';
 import {
     AppRegistry,
-    asset,
-    Pano,
     Text,
     View,
     Scene
@@ -10,6 +8,7 @@ import {
 
 import Homepage from './components/homepage.js';
 import Workplace from './components/workplace.js';
+import Panorama from './components/panorama.js';
 
 
 export default class vrWorkplace extends React.Component {
@@ -20,51 +19,47 @@ export default class vrWorkplace extends React.Component {
          this.lastUpdate = Date.now();
 
         this.state = {
-
-            displayHomepage: true,
-            workplaces: []
+            workplaces: [],
+            displayHomepage: true
         };
 
         this.onNavigationClick = this.onNavigationClick.bind(this);
-        this.toggleDisplayHomepage = this.toggleDisplayHomepage.bind(this);
         this.onHomeLinkClick = this.onHomeLinkClick.bind(this);
-        this.testHomepageOrWorkplace = this.testHomepageOrWorkplace.bind(this);
         this.fetchWorkplaces = this.fetchWorkplaces.bind(this);
 
     }
 
     componentWillMount() {
-        this.setState({current_workplace: this.state.workplaces[0]});
-
+    
     }
     componentWillUnmount() {
 
     }
     componentDidMount() {
-        this.fetchWorkplaces().then(data => {
-            this.setState({
-                workplaces: data
-            })
-        })
+        this.state.workplaces.length === 0 ? this.fetchWorkplaces() : console.log('no fetch');
     }
 
     fetchWorkplaces(){
-        return fetch('/data/workplaces.json').then(res => {
-            return res.json();
-        })
-    }
 
-
-    toggleDisplayHomepage(){
-
-        this.setState({
-            displayHomepage: !this.state.displayHomepage
-        })
+        fetch('/data/workplaces.json')
+            .then((res) => {
+                return res.json()
+            })
+                .then((json) => {
+                    console.log('parsed json', json);
+                    this.setState({
+                        workplaces: json,
+                        current_workplace: json[0]
+                    })
+                }).catch((err) => {
+                    console.log('fetch failed:', err);
+                })
     }
 
     onNavigationClick(item, e) {
 
         var new_workplace = this.state.workplaces.find(i => i['id'] === item.id);
+
 
         if(new_workplace != this.state.current_workplace){
             postMessage({
@@ -72,11 +67,10 @@ export default class vrWorkplace extends React.Component {
                  })
         }
 
-        if(this.state.current_workplace.id === 0){
-            this.toggleDisplayHomepage();
-        }
-
-        this.setState({current_workplace: new_workplace});
+        this.setState({
+            current_workplace: new_workplace,
+            displayHomepage: !this.state.displayHomepage
+        });
 
     }
 
@@ -88,23 +82,13 @@ export default class vrWorkplace extends React.Component {
                  type: "sceneChanged"
              })
 
-        this.toggleDisplayHomepage();
-
-        this.setState({current_workplace: new_workplace});
+        this.setState({
+            current_workplace: new_workplace,
+            displayHomepage: !this.state.displayHomepage
+        });
     }
 
 
-    testHomepageOrWorkplace(){
-        if(this.state.displayHomepage){
-            return(
-                <Homepage workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} />
-            )
-        } else {
-            return (
-                <Workplace current_workplace={this.state.current_workplace} onHomeLinkClick={this.onHomeLinkClick}/>
-            );
-        }
-    }
     sceneOnLoad() {
 
         postMessage({type: "sceneLoadStart"})
@@ -117,15 +101,17 @@ export default class vrWorkplace extends React.Component {
 
     render() {
 
-        var homepageOrWorkplace = this.testHomepageOrWorkplace();
-
         return (
 
                 <View>
 
-                    <Pano source={asset(this.state.current_workplace.panoImage)} onLoad={this.sceneOnLoad} onLoadEnd={this.sceneOnLoadEnd}/>
+                    {this.state.current_workplace ? <Panorama source={this.state.current_workplace.panoImage} sceneOnLoad={this.sceneOnLoad} sceneOnLoadEnd={this.sceneOnLoadEnd}/> : null}
 
-                    {homepageOrWorkplace}
+                    {this.state.displayHomepage ?
+                        <Homepage workplaces={this.state.workplaces} onNavigationClick={this.onNavigationClick} />
+                        :
+                        <Workplace current_workplace={this.state.current_workplace} onHomeLinkClick={this.onHomeLinkClick}/>
+                    }
 
                 </View>
 

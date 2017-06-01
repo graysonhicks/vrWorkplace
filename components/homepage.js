@@ -41,7 +41,7 @@ export default class Homepage extends Component {
     return (
     <View>
         <Welcome opacity={this.state.welcomeAnimationOpacity}/>
-        <Menu opacity={this.state.menuAnimationOpacity} workplaces={this.props.workplaces} onNavigationClick={this.props.onNavigationClick} />
+        {this.props.workplaces.length ? <Menu opacity={this.state.menuAnimationOpacity} workplaces={this.props.workplaces} onNavigationClick={this.props.onNavigationClick} /> : null}
     </View>
     );
   }

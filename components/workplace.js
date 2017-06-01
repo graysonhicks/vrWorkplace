@@ -11,7 +11,7 @@ export default class Workplace extends Component {
     }
     buildHotpoints() {
         var that = this;
-
+console.log(this.props.current_workplace);
         if (this.props.current_workplace.id !== 0) {
             var hotPoints = this.props.current_workplace['hotPoints'].map(function(item, i) {
 
@@ -34,7 +34,7 @@ export default class Workplace extends Component {
         return (
         <View>
             <HomeLink onHomeLinkClick={this.props.onHomeLinkClick} />
-            {hotPoints}
+            {this.props.current_workplace['hotPoints'] ? hotPoints : null}
         </View>
 
         );

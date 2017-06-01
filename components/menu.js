@@ -29,6 +29,7 @@ export default class Menu extends Component {
       var buttons = this.buildButtons();
 
     return (
+
         <Animated.View style={{
             flex: 1,
             flexDirection: 'column',
